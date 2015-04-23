@@ -64,28 +64,35 @@ var BookView = Backbone.View.extend({
 
 //<!-- collection view -->//
 var BooksView = Backbone.View.extend({
+
   initialize: function () {
     this.listenTo(this.collection, 'remove', this.removeModel);
   },
 
   template: _.template($('#BooksViewTmpl').html()),
+
+  children: {},
+
   render: function () {
     this.el.innerHTML = this.template(this.collection);
     var ol = this.$('ol');
 
     this.collection.each(function (model) {
-      model.view = new BookView({ model: model });
-      ol.append(model.view.render().el);
-    });
+      /* sometimes we don't want the model to be aware of the view*/
+      //model.view = new BookView({ model: model });
+      this.children[model.cid] = new BookView({ model: model });
+      ol.append(this.children[model.cid].render().el);
+      //ol.append(model.view.render().el);
+    }, this);
 
     return this;
   },
 
   removeModel: function (model) {
     console.log(model.get('title') + ' was removed');
-    //var put = $('#output ol');
     put.append('<li>' + model.get('title') + '</li>');
-    model.view.remove();
+    //model.view.remove();
+    this.children[model.cid].remove();
   }
 });
 
