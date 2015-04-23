@@ -66,6 +66,10 @@ var BooksView = Backbone.View.extend({
   initialize: function () {
     this.listenTo(this.collection, 'remove', this.removeBook);
     this.listenTo(this.collection, 'add', this.addBook);
+
+    // updates our books length
+    this.listenTo(this.collection, 'remove', this.updateNumber);
+    this.listenTo(this.collection, 'add', this.updateNumber);
   },
 
   template: _.template($('#BooksViewTmpl').html()),
@@ -74,15 +78,7 @@ var BooksView = Backbone.View.extend({
 
   render: function () {
     this.el.innerHTML = this.template(this.collection);
-    var ol = this.$('ol');
-
-    this.collection.each(function (model) {
-      /* sometimes we don't want the model to be aware of the view*/
-      //model.view = new BookView({ model: model });
-      this.children[model.cid] = new BookView({ model: model });
-      ol.append(this.children[model.cid].render().el);
-      //ol.append(model.view.render().el);
-    }, this);
+    this.collection.each(this.addBook.bind(this));
 
     return this;
   },
@@ -95,8 +91,11 @@ var BooksView = Backbone.View.extend({
   removeBook: function (model) {
     console.log(model.get('title') + ' was removed');
     put.append('<li>' + model.get('title') + '</li>');
-    //model.view.remove();
     this.children[model.cid].remove();
+  },
+
+  updateNumber: function () {
+    this.$('span').text(this.collection.length);
   }
 });
 
