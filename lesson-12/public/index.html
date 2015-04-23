@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Managing DOM events</title>
+    <link rel='stylesheet' href='css/main.css'>
+  </head>
+  <body>
+    <div id='wrap'>
+      <header class='cf'>
+        <h1 class='cf'>Backbone }}}}}}}}}}}}}}</h1>
+        <nav class='cf'>
+          <ul>
+            <li><a href="index.html">home</a></li>
+            <li><a href="about.html">about</a></li>
+            <li><a href="work.html">work</a></li>
+            <li><a href="contact.html">contact</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <section class='cf' id='main'>
+        <div id="main-content">
+          <h1>Managing DOM events.</h1>
+          <small>Events in Backbone are a cinch to work with.</small>
+
+          <!-- template for a model -->
+          <script type='text/template' id='BookViewTmpl'>
+            <h3> <%= author %> </h3>
+            <h3><%= title %> </h3>
+            <p><button class='remove'>Remove.</button></p>
+          </script>
+
+          <!-- template for a collection-->
+          <script type='text/template' id='BooksViewTmpl'>
+            <h1>Book List (<%= length %>)</h1>
+
+            <ol></ol>
+          </script>
+          <div id='output'>
+            <h3>Books that are removed.</h3>
+            <ol></ol>
+          </div>
+        </div>
+      </section>
+    </div>
+    <footer class='cf'>
+      <p>Copyright &copy; 2015 Tony Brown Development \m/ @ \m/.</p>
+    </footer>
+
+    <script src='/js/libs/jquery.js'></script>
+    <script src='/js/libs/underscore.js'></script>
+    <script src='/js/libs/backbone.js'></script>
+    <script src='/js/app.js'></script>
+  </body>
+</html>
