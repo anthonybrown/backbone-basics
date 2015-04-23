@@ -25,10 +25,13 @@
           <h1>Backbone Views, our presentation layer.</h1>
           <small>The View in Backbone is sparse as in almost non-existent compared to other frameworks.</small>
 
+          <!-- template for a model -->
           <script type='text/template' id='BookViewTmpl'>
-            <h2> <%= title %> </h2>
             <h3> <%= author %> </h3>
+            <h3><%= title %> </h3>
           </script>
+
+          <!-- template for a collection-->
           <script type='text/template' id='BooksViewTmpl'>
             <h1>Book List (<%= length %>)</h1>
 

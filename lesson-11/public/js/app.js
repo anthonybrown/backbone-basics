@@ -1,6 +1,6 @@
 var output = $('#main-content');
 
-output.append('<h4>Our Backbone View.</h4>');
+output.append('<h4>Our Backbone Views.</h4>');
 
 // Model
 var Book = Backbone.Model.extend({
@@ -42,7 +42,7 @@ books.add({ author: 'Jules Verne', title: '20,000 Leagues under the sea.' });
 books.add({ author: 'Virgina Wolf', title: 'A Room of One\'s Own.' });
 books.add({ author: 'Arthur C. Doyle', title: 'His Last Bow.' });
 
-// render model
+//<!-- model view -->//
 var BookView = Backbone.View.extend({
   template: _.template($('#BookViewTmpl').html()),
   tagName: 'li',
@@ -52,7 +52,7 @@ var BookView = Backbone.View.extend({
   }
 });
 
-// render collection
+//<!-- collection view -->//
 var BooksView = Backbone.View.extend({
   template: _.template($('#BooksViewTmpl').html()),
   render: function () {
@@ -68,15 +68,16 @@ var BooksView = Backbone.View.extend({
   }
 });
 
-/* THIS RENDERS OUR COLLECTIONS */
-
 var booksView = new BooksView({ collection: books });
+$('#main-content').append('<p>This is our collection view.</p>');
 $('#main-content').append(booksView.render().el);
 
 /* THIS RENDERS OUR MODELS */
+var bookView = new BookView({ model: books.at(2) });
 
-//var bookView = new BookView({ model: books.at(4) });
-//$('#main-content').append(bookView.render().el);
+$('#main-content').append('<p>this is from the model: <code>var bookView = new BookView({ model: books.at(2) });</code></p>');
+$('#main-content').append('<p>The <code>books.at(2);</code> acts like an array, so it\'s actually getting the 3rd book in the collection.</p>');
+$('#main-content').append(bookView.render().el);
 
 // Example Views
 //var BookView = Backbone.View.extend({
