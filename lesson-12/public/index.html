@@ -25,6 +25,13 @@
           <h1>Managing DOM events.</h1>
           <small>Events in Backbone are a cinch to work with.</small>
 
+          <!-- template for addView-->
+          <script type='text/template' id='AddBookViewTmpl'>
+            <p>Title: <input name="title" id="title"/></p>
+            <p>Author: <input name="author" id="author"/></p>
+            <p><button class='add'>Add New Book.</button></p>
+          </script>
+
           <!-- template for a model -->
           <script type='text/template' id='BookViewTmpl'>
             <h3> <%= author %> </h3>
@@ -38,6 +45,7 @@
 
             <ol></ol>
           </script>
+
           <div id='output'>
             <h3>Books that are removed.</h3>
             <ol></ol>

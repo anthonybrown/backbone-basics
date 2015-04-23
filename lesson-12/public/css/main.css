@@ -277,7 +277,15 @@ textarea {
 button {
   overflow: visible;
   border-radius: 5px;
+}
+
+button.remove {
   background: royalblue;
+  color: white;
+}
+
+button.add {
+  background: firebrick;
   color: white;
 }
 

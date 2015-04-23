@@ -1,7 +1,5 @@
 var output = $('#main-content');
-
 var put = $('#output ol');
-
 output.append('<h4>Our Backbone Views.</h4>');
 
 // Model
@@ -66,7 +64,8 @@ var BookView = Backbone.View.extend({
 var BooksView = Backbone.View.extend({
 
   initialize: function () {
-    this.listenTo(this.collection, 'remove', this.removeModel);
+    this.listenTo(this.collection, 'remove', this.removeBook);
+    this.listenTo(this.collection, 'add', this.addBook);
   },
 
   template: _.template($('#BooksViewTmpl').html()),
@@ -88,7 +87,12 @@ var BooksView = Backbone.View.extend({
     return this;
   },
 
-  removeModel: function (model) {
+  addBook: function (model) {
+    this.children[model.cid] = new BookView({ model: model });
+    this.$('ol').append(this.children[model.cid].render().el);
+  },
+
+  removeBook: function (model) {
     console.log(model.get('title') + ' was removed');
     put.append('<li>' + model.get('title') + '</li>');
     //model.view.remove();
@@ -96,9 +100,35 @@ var BooksView = Backbone.View.extend({
   }
 });
 
+// view for AddBookView
+var AddBookView = Backbone.View.extend({
+  template: _.template($('#AddBookViewTmpl').html()),
+  events: {
+    'click .add': 'addBook'
+  },
+
+  render: function () {
+    this.el.innerHTML = this.template();
+    return this;
+  },
+
+  addBook: function (e) {
+    this.collection.add({
+      title: this.$('#title').val(),
+      author: this.$('#author').val()
+    });
+  }
+});
+
+
 var booksView = new BooksView({ collection: books });
+var addBookView = new AddBookView({ collection: books });
+$('#main-content').append(addBookView.render().el);
 $('#main-content').append('<p>This is our collection view.</p>');
 $('#main-content').append(booksView.render().el);
+
+
+
 
 /* THIS RENDERS OUR MODELS */
 //var bookView = new BookView({ model: books.at(2) });
