@@ -1,0 +1,17 @@
+{
+  "name": "lesson-11",
+  "version": "1.0.2",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Tony Brown",
+  "license": "MIT",
+  "dependencies": {
+    "body": "^5.0.0",
+    "body-parser": "^1.12.3",
+    "express": "^4.12.3"
+  }
+}
