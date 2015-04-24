@@ -290,6 +290,15 @@ button.add {
   color: white;
 }
 
+a.add {
+  text-decoration: none;
+  border-radius: 5px;
+  padding: 0.2em 1em;
+  background: green;
+  color: white;
+  border: 1px solid silver;
+}
+
 /**
  * Address inconsistent `text-transform` inheritance for `button` and `select`.
  * All other form control elements do not inherit `text-transform` values.
